@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="512" height="512" rx="96" fill="#121316"/>
+  <rect x="48" y="48" width="416" height="120" rx="20" fill="#0B0C0E" stroke="#252830" stroke-width="4"/>
+  <text x="432" y="132" font-family="system-ui, sans-serif" font-size="64" font-weight="600" fill="#E6EDF3" text-anchor="end">V8</text>
+  <!-- Keypad Grid Preview -->
+  <rect x="48" y="200" width="88" height="64" rx="14" fill="#252830"/>
+  <rect x="156" y="200" width="88" height="64" rx="14" fill="#252830"/>
+  <rect x="264" y="200" width="88" height="64" rx="14" fill="#252830"/>
+  <rect x="372" y="200" width="88" height="64" rx="14" fill="#2E3A52"/>
+  
+  <rect x="48" y="284" width="88" height="64" rx="14" fill="#252830"/>
+  <rect x="156" y="284" width="88" height="64" rx="14" fill="#252830"/>
+  <rect x="264" y="284" width="88" height="64" rx="14" fill="#252830"/>
+  <rect x="372" y="284" width="88" height="64" rx="14" fill="#2E3A52"/>
+  
+  <rect x="48" y="368" width="88" height="64" rx="14" fill="#252830"/>
+  <rect x="156" y="368" width="88" height="64" rx="14" fill="#252830"/>
+  <rect x="264" y="368" width="88" height="64" rx="14" fill="#252830"/>
+  <rect x="372" y="368" width="88" height="64" rx="14" fill="#D97706"/>
+</svg>

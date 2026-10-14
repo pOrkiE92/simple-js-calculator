@@ -1,0 +1,352 @@
+/**
+ * Core Calculator Component Styles
+ * Tactile micro-interactions, containment, and accessible typography.
+ */
+
+/* Main Container */
+.calculator-app {
+  display: flex;
+  width: 100vw;
+  height: 100dvh;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bg-app);
+}
+
+.calc-workstation {
+  display: flex;
+  background-color: var(--bg-chassis);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-chassis);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  max-width: 960px;
+  width: 100%;
+  height: 94dvh;
+  max-height: 820px;
+}
+
+/* Left Pane: Calculation Tape / History */
+.history-pane {
+  display: flex;
+  flex-direction: column;
+  width: 280px;
+  background-color: #15171C;
+  border-right: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+}
+
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.history-title {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  color: #8B949E;
+}
+
+.btn-ghost-sm {
+  background: transparent;
+  border: none;
+  color: #6E7681;
+  font-size: 0.75rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.btn-ghost-sm:hover {
+  color: #E6EDF3;
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+.history-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.history-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #6E7681;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.history-empty-hint {
+  font-size: 0.75rem;
+  color: #484F58;
+  margin-top: 4px;
+}
+
+.history-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background-color: #191B22;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color 100ms ease, border-color 100ms ease;
+}
+
+.history-item:hover, .history-item:focus-visible {
+  background-color: #21262D;
+  border-color: #30363D;
+}
+
+.history-expr {
+  font-size: 0.8rem;
+  color: #8B949E;
+  font-family: var(--font-family-mono);
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.history-res {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #F0F6FC;
+  font-family: var(--font-family-mono);
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}
+
+/* Right Pane: Calculator Interface */
+.calc-main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 20px;
+  overflow: hidden;
+}
+
+/* Screen / Display Container */
+.calc-display {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  background-color: var(--bg-display);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-display);
+  padding: 16px 20px;
+  min-height: 120px;
+  contain: layout style paint;
+}
+
+.display-expression {
+  font-family: var(--font-family-mono);
+  font-size: 1.1rem;
+  color: #8B949E;
+  height: 1.5rem;
+  width: 100%;
+  text-align: right;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+}
+
+.display-expression::-webkit-scrollbar {
+  display: none;
+}
+
+.display-value {
+  font-family: var(--font-family-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 2.75rem;
+  font-weight: 500;
+  color: #F0F3F6;
+  width: 100%;
+  text-align: right;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.display-value.font-sm {
+  font-size: 2.1rem;
+}
+
+.display-value.font-xs {
+  font-size: 1.6rem;
+}
+
+.display-value.font-xxs {
+  font-size: 1.25rem;
+}
+
+.display-value.display-error {
+  color: #F87171;
+  font-size: 1.5rem;
+}
+
+/* Quick Bar / Function Pills */
+.calc-quickbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
+  gap: 8px;
+}
+
+.quickbar-group {
+  display: flex;
+  gap: 6px;
+}
+
+.btn-pill {
+  background-color: var(--key-ctrl-bg);
+  border: 1px solid var(--border-subtle);
+  color: var(--key-ctrl-text);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: background-color 80ms ease;
+}
+
+.btn-pill:hover {
+  background-color: var(--key-ctrl-hover);
+}
+
+.btn-pill.btn-active-toggle {
+  background-color: var(--key-op-bg);
+  border-color: var(--key-op-border);
+  color: var(--key-op-text);
+}
+
+/* Keypad Section */
+.calc-keypad-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1.35fr;
+  gap: var(--gap-keypad);
+  flex: 1;
+  margin-top: 14px;
+}
+
+.keypad-grid {
+  display: grid;
+  gap: var(--gap-keypad);
+  touch-action: manipulation;
+}
+
+.grid-scientific {
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+}
+
+.grid-standard {
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+}
+
+/* Keypad Buttons */
+.key-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-family-mono);
+  font-size: 1.25rem;
+  font-weight: 500;
+  border-radius: var(--radius-key);
+  border: 1px solid var(--border-subtle);
+  cursor: pointer;
+  user-select: none;
+  min-height: 48px;
+  touch-action: manipulation;
+  transition: transform var(--touch-duration) ease, background-color var(--touch-duration) ease;
+}
+
+.key-btn:hover {
+  border-color: var(--border-highlight);
+}
+
+.key-btn.key-active, .key-btn:active {
+  transform: translateY(2px);
+  filter: brightness(1.2);
+}
+
+/* Specific Key Type Coloring */
+.key-num {
+  background-color: var(--key-num-bg);
+  color: var(--key-num-text);
+}
+
+.key-num:hover {
+  background-color: var(--key-num-hover);
+}
+
+.key-ctrl {
+  background-color: var(--key-ctrl-bg);
+  color: var(--key-ctrl-text);
+  font-size: 1.1rem;
+}
+
+.key-ctrl:hover {
+  background-color: var(--key-ctrl-hover);
+}
+
+.key-sci {
+  background-color: var(--key-sci-bg);
+  color: var(--key-sci-text);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.key-sci:hover {
+  background-color: var(--key-sci-hover);
+}
+
+.key-op {
+  background-color: var(--key-op-bg);
+  border-color: var(--key-op-border);
+  color: var(--key-op-text);
+  font-size: 1.4rem;
+}
+
+.key-op:hover {
+  background-color: var(--key-op-hover);
+}
+
+.key-accent {
+  background-color: var(--key-accent-bg);
+  border-color: transparent;
+  color: var(--key-accent-text);
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.key-accent:hover {
+  background-color: var(--key-accent-hover);
+}
+
+.key-span-2 {
+  grid-column: span 2;
+}
+
+/* Mobile-only toggle buttons hidden on desktop */
+.btn-mobile-only {
+  display: none;
+}

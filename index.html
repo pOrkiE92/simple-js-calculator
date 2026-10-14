@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#121316">
+  <meta name="description" content="High-performance, zero-latency precision calculator optimized for V8 JS engine and mobile/desktop environments.">
+  <title>V8 Precision Calculator</title>
+  
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/svg+xml" href="./icons/icon.svg">
+  <link rel="apple-touch-icon" href="./icons/icon.svg">
+
+  <link rel="stylesheet" href="./css/base.css">
+  <link rel="stylesheet" href="./css/calculator.css">
+  <link rel="stylesheet" href="./css/responsive.css">
+</head>
+<body>
+  <main class="calculator-app" role="main">
+    <div class="calc-workstation">
+      
+      <!-- Left Pane: Calculation Tape / History (Persistent on Desktop, Slide-up Sheet on Mobile) -->
+      <aside class="history-pane" id="history-panel" aria-label="Calculation Tape and History">
+        <header class="history-header">
+          <span class="history-title">Calculation Tape</span>
+          <div class="history-actions">
+            <button class="btn-ghost-sm" id="btn-clear-history" type="button" aria-label="Clear calculation history">Clear</button>
+            <button class="btn-ghost-sm btn-mobile-only" id="btn-close-history" type="button" aria-label="Close history sheet">✕</button>
+          </div>
+        </header>
+        <div class="history-content" id="history-list" tabindex="0" role="region" aria-label="Past calculations">
+          <!-- Dynamic history entries generated here -->
+        </div>
+      </aside>
+
+      <!-- Right Pane: Main Calculator Surface -->
+      <section class="calc-main">
+        
+        <!-- Screen / Display Output -->
+        <div class="calc-display" role="region" aria-label="Calculator display">
+          <div class="display-expression" id="calc-expr" aria-label="Entered expression"></div>
+          <div class="display-value" id="calc-val" role="status" aria-live="polite" aria-atomic="true">0</div>
+        </div>
+
+        <!-- Quick Functions & Ergonomic Control Bar -->
+        <nav class="calc-quickbar" aria-label="Calculator mode controls">
+          <div class="quickbar-group">
+            <button class="btn-pill" id="btn-angle-toggle" type="button" aria-label="Toggle angle mode">DEG</button>
+            <button class="btn-pill btn-mobile-only" id="btn-sci-toggle" type="button" aria-expanded="false" aria-label="Toggle scientific keypad">Sci</button>
+            <button class="btn-pill btn-mobile-only" id="btn-history-toggle" type="button" aria-expanded="false" aria-label="Toggle calculation history">Tape</button>
+          </div>
+          <div class="quickbar-group" id="calc-keypad-mem">
+            <button class="btn-pill" data-action="mem-clear" type="button" title="Memory Clear">MC</button>
+            <button class="btn-pill" data-action="mem-recall" type="button" title="Memory Recall">MR</button>
+            <button class="btn-pill" data-action="mem-add" type="button" title="Memory Add">M+</button>
+            <button class="btn-pill" data-action="mem-sub" type="button" title="Memory Subtract">M-</button>
+          </div>
+        </nav>
+
+        <!-- Main Keypad Grid Wrapper -->
+        <div class="calc-keypad-wrapper" id="calc-keypad">
+          
+          <!-- Scientific Keypad (Side-by-side on desktop, collapsible drawer on mobile) -->
+          <div class="keypad-grid grid-scientific" id="scientific-keys" role="group" aria-label="Scientific functions">
+            <button class="key-btn key-sci" data-action="func" data-val="sin(" type="button">sin</button>
+            <button class="key-btn key-sci" data-action="func" data-val="cos(" type="button">cos</button>
+            <button class="key-btn key-sci" data-action="func" data-val="tan(" type="button">tan</button>
+            <button class="key-btn key-sci" data-action="operator" data-val="^" type="button">xʸ</button>
+
+            <button class="key-btn key-sci" data-action="func" data-val="asin(" type="button">asin</button>
+            <button class="key-btn key-sci" data-action="func" data-val="acos(" type="button">acos</button>
+            <button class="key-btn key-sci" data-action="func" data-val="atan(" type="button">atan</button>
+            <button class="key-btn key-sci" data-action="func" data-val="sqrt(" type="button">√x</button>
+
+            <button class="key-btn key-sci" data-action="func" data-val="ln(" type="button">ln</button>
+            <button class="key-btn key-sci" data-action="func" data-val="log(" type="button">log</button>
+            <button class="key-btn key-sci" data-action="paren" data-val="(" type="button">(</button>
+            <button class="key-btn key-sci" data-action="paren" data-val=")" type="button">)</button>
+
+            <button class="key-btn key-sci" data-action="const" data-val="π" type="button">π</button>
+            <button class="key-btn key-sci" data-action="const" data-val="e" type="button">e</button>
+            <button class="key-btn key-sci" data-action="func" data-val="fact(" type="button">n!</button>
+            <button class="key-btn key-sci" data-action="func" data-val="abs(" type="button">|x|</button>
+
+            <button class="key-btn key-sci" data-action="func" data-val="cbrt(" type="button">∛x</button>
+            <button class="key-btn key-sci" data-action="func" data-val="exp(" type="button">eˣ</button>
+            <button class="key-btn key-sci" data-action="operator" data-val="%" type="button">%</button>
+            <button class="key-btn key-sci" data-action="func" data-val="1 / (" type="button">1/x</button>
+          </div>
+
+          <!-- Standard Keypad (Ergonomic cluster) -->
+          <div class="keypad-grid grid-standard" role="group" aria-label="Standard calculator keypad">
+            <button class="key-btn key-ctrl" data-action="clear" type="button">AC</button>
+            <button class="key-btn key-ctrl" data-action="backspace" type="button" aria-label="Backspace">⌫</button>
+            <button class="key-btn key-ctrl" data-action="negate" type="button" aria-label="Negate">±</button>
+            <button class="key-btn key-op" data-action="operator" data-val="÷" type="button">÷</button>
+
+            <button class="key-btn key-num" data-action="digit" data-val="7" type="button">7</button>
+            <button class="key-btn key-num" data-action="digit" data-val="8" type="button">8</button>
+            <button class="key-btn key-num" data-action="digit" data-val="9" type="button">9</button>
+            <button class="key-btn key-op" data-action="operator" data-val="×" type="button">×</button>
+
+            <button class="key-btn key-num" data-action="digit" data-val="4" type="button">4</button>
+            <button class="key-btn key-num" data-action="digit" data-val="5" type="button">5</button>
+            <button class="key-btn key-num" data-action="digit" data-val="6" type="button">6</button>
+            <button class="key-btn key-op" data-action="operator" data-val="-" type="button">−</button>
+
+            <button class="key-btn key-num" data-action="digit" data-val="1" type="button">1</button>
+            <button class="key-btn key-num" data-action="digit" data-val="2" type="button">2</button>
+            <button class="key-btn key-num" data-action="digit" data-val="3" type="button">3</button>
+            <button class="key-btn key-op" data-action="operator" data-val="+" type="button">+</button>
+
+            <button class="key-btn key-num key-span-2" data-action="digit" data-val="0" type="button">0</button>
+            <button class="key-btn key-num" data-action="decimal" data-val="." type="button">.</button>
+            <button class="key-btn key-accent" data-action="equals" data-val="=" type="button">=</button>
+          </div>
+
+        </div>
+
+      </section>
+    </div>
+  </main>
+
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>
